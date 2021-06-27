@@ -300,6 +300,31 @@ After stopping and removing your containers you can proceed to remove the volume
 
 **Note** If you've changed your folder name from the default `azerothcore-wotlk` the volume name will be slightly different. To find the new volume name you can use the command `docker volume ls`. The volume should be labelled something along the lines of `xxxx_ac-database`.
 
+### How can I backup / clone my database files?
+
+In Docker Desktop, open the (sub-)container that reads like `azerothcore_ac-database_1` by clicking on it. Clicking on the second symbol from the left opens a command line interface (cli) inside the docker container.
+
+![grafik](https://user-images.githubusercontent.com/60810320/123551935-37f65200-d774-11eb-82e2-719ef349994c.png)
+
+In this cli, enter `cd /usr/bin`. The root sign (`#`) at the start of the line won't change to reflect this! (Type `ls` if you're not sure if you're in the right place; somewhere in the long list there should be a number of `mysql` commands.)
+
+Now, for example to clone your `acore_auth` database, type the following: (it's intentional that there is a space between `-u` and your login (e.g. `root`), but not between `-p` and your password, e.g. `password`)
+
+(1) `mysql -u root -ppassword -e "create database acore_auth_backup"` (choose any unused database name you like)
+
+(2) `mysqldump acore_auth -u root -ppassword > acore_auth_dump.sql` (the name of the sql file does not matter)
+
+(3) `mysql acore_auth_backup -u root -ppassword < acore_auth_dump.sql` (re-use the sql file name from (2) and the database name you chose in (1))
+
+To use your backup, first delete the database that you want to overwrite in the same cli in `/usr/bin` using `mysql -u root -ppassword -e "drop database acore_auth"`, create it again (step 1) and dump your backup and re-import it (steps 2 and 3).
+
+### How can I re-create one of the databases from scratch? (e.g. the acore_world database including all database updates)
+
+See above for like for cloning/backup, open the cli, change the working directory to `/usr/bin` and enter `mysql -u root -ppassword -e "drop database acore_world"` (it will be completely gone, if you don't have a backup!). Otherwise you can also just rename it, e.g. in HeidiSQL or the SQL client of your choice.
+
+Now enter the shell in your repo directory (not the virtual one in docker as above!) and enter `docker-compose run --rm ac-dev-server ./acore.sh db-assembler import-all`.
+This will create all databases that are missing, while keeping all existing databases untouched (such as acore_auth and acore_characters).
+
 ### macOS optimizations (for dev server)
 
 The **osxfs** is well known to have [performance limitations](https://github.com/docker/for-mac/issues/1592), that's why we optimized the docker-compose 
