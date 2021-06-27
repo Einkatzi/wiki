@@ -344,21 +344,15 @@ One of them should contain subdirectories named "Cameras", "dbc", "maps", "mmaps
 Finally, check ./env/docker/etc/worldserver.conf for "DataDir=" and see if the path leads to where the map subdirectories are (ignore the "/azerothcore/" part!)
 
 E.g., if your local repo is in "D:\Games\AzerothCoreRepo\" and the maps are in the subdirectory "env\docker\data\", the line should read:
-```
-DataDir = "/azerothcore/env/docker/data"
-```
+`DataDir = "/azerothcore/env/docker/data"`
 
 ### I can access the acore-world database with other means (e.g. HeidiSQL), but not with Keira3, which gives the error message:
 
-Error:	Client does not support authentication protocol requested by server; consider upgrading MySQL client
-
-Code:	      ER_NOT_SUPPORTED_AUTH_MODE
-
-Errno:	1251
-
-SQL State:	08004
+`Error:	Client does not support authentication protocol requested by server; consider upgrading MySQL client`
+`Code:	ER_NOT_SUPPORTED_AUTH_MODE`
+`Errno:	1251`
+`SQL State:	08004`
 
 Solution: run the following SQL command in HeidiSQL (or your preferred client where you could access the db):
-```
-ALTER USER 'root' IDENTIFIED WITH mysql_native_password BY 'password'; FLUSH PRIVILEGES;
-```
+
+`ALTER USER 'root' IDENTIFIED WITH mysql_native_password BY 'password'; FLUSH PRIVILEGES;`
