@@ -35,10 +35,10 @@ Important things to do before reporting a bug:
 
 **2) Search among the [issues](https://github.com/azerothcore/azerothcore-wotlk/issues) to check if someone has already reported the bug, in that case you have just to comment the issue to confirm the bug (including your core revision)**
 
-If **(and only if)** the bug hasn't been reported yet, you can [open an issue](https://github.com/azerothcore/azerothcore-wotlk/issues/new) and include:
+If **(and only if)** the bug hasn't been reported yet, you can [open an issue](https://github.com/azerothcore/azerothcore-wotlk/issues/new/choose) and include:
 
 - the **description of the bug**, including any useful **links** and **IDs/GUIDs/names** of any related entities (NPCs, spells, gameobjects, etc..)
-- the **core revision (commit hash)** of the AzerothCore you are running on, **do not write just "latest version"** even if you have just updated your core
+- the **core revision (commit hash)** of the AzerothCore you are running on, **do not write just "latest version"** even if you have just updated your core (type `server debug` in the worldserver console and copy&paste the result)
 - if it is about a build problem, it would be useful to know also your **operating system** and **compiler version**
 
 ## How to test a Pull Request
