@@ -333,24 +333,27 @@ Do **NOT** try to detach using `ctrl+c` or you will kill your worldserver proces
 
 ### Upon starting the containers, worldserver exits with an error message like "Map file './maps/0004331.map': does not exist":
 
-Solution: Check the following subdirectories in your local repo (in which you executed the ./acore.sh commands) 
+Solution: Check the following subdirectories in your local repo (in which you executed the `./acore.sh` commands) 
 
-./env/dist/data
+`./env/dist/data`
 
-./env/docker/data
+`./env/docker/data`
 
-One of them should contain subdirectories named "Cameras", "dbc", "maps", "mmaps" and "vmaps", together around 3 GB. If neither of them does, you need to (re-)download the maps. 
+One of them should contain subdirectories named `Cameras`, `dbc`, `maps`, `mmaps` and `vmaps`, together around 3 GB. If neither of them does, you need to (re-)download the maps. 
 
-Finally, check ./env/docker/etc/worldserver.conf for "DataDir=" and see if the path leads to where the map subdirectories are (ignore the "/azerothcore/" part!)
+Finally, check `./env/docker/etc/worldserver.conf` for `"DataDir="` and see if the path leads to where the map subdirectories are (ignore the `/azerothcore/` part!)
 
-E.g., if your local repo is in "D:\Games\AzerothCoreRepo\" and the maps are in the subdirectory "env\docker\data\", the line should read:
+E.g., if your local repo is in `"D:\Games\AzerothCoreRepo\"` and the maps are in the subdirectory `"env\docker\data\"`, the line should read:
 `DataDir = "/azerothcore/env/docker/data"`
 
 ### I can access the acore-world database with other means (e.g. HeidiSQL), but not with Keira3, which gives the error message:
 
 `Error:	Client does not support authentication protocol requested by server; consider upgrading MySQL client`
+
 `Code:	ER_NOT_SUPPORTED_AUTH_MODE`
+
 `Errno:	1251`
+
 `SQL State:	08004`
 
 Solution: run the following SQL command in HeidiSQL (or your preferred client where you could access the db):
