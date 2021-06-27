@@ -329,9 +329,9 @@ Note for Windows users: using git bash on Windows you have to prefix this comman
 
 Do **NOT** try to detach using `ctrl+c` or you will kill your worldserver process!
 
-##Troubleshooting
+## Troubleshooting
 
-###Upon starting the containers, worldserver exits with an error message like "Map file './maps/0004331.map': does not exist":
+### Upon starting the containers, worldserver exits with an error message like "Map file './maps/0004331.map': does not exist":
 Solution: Check the following subdirectories in your local repo (in which you executed the ./acore.sh commands) 
 ./env/dist/data
 ./env/docker/data
@@ -342,7 +342,7 @@ E.g., if your local repo is in "D:\Games\AzerothCoreRepo\" and the maps are in t
 DataDir = "/azerothcore/env/docker/data"
 ```
 
-###I can access the acore-world database with other means (e.g. HeidiSQL), but not with Keira3, which gives the error message:
+### I can access the acore-world database with other means (e.g. HeidiSQL), but not with Keira3, which gives the error message:
 Error:	Client does not support authentication protocol requested by server; consider upgrading MySQL client
 Code:	      ER_NOT_SUPPORTED_AUTH_MODE
 Errno:	1251
